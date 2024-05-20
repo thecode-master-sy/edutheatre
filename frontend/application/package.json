@@ -9,10 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "framer-motion": "^11.2.4",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"
+=======
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.2.4",
+    "lucide-react": "^0.378.0",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
+>>>>>>> ee6e8a0d9bc5ba75b815014c4a8a72e8688d7c42
   },
   "devDependencies": {
     "@types/node": "^20",

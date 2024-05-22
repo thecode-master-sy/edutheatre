@@ -1,3 +1,3 @@
-export function Signup() {
-  return <div>this is the signup server component</div>;
+export default function SignupComponent() {
+  return <div>this is the signup component</div>;
 }

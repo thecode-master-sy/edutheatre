@@ -3,6 +3,7 @@ import { User, Token } from "./../services";
 import { emailValidator } from "../modules";
 import { UserRepo } from "../repos";
 import bcrypt from "bcrypt";
+import { env } from "../config";
 
 
 class Auth {
@@ -63,6 +64,39 @@ class Auth {
             error: true,
             message: "email does not exit",
         });
+    }
+
+    public static async oauthLogin(req: Request, res: Response){
+        let name: string;
+        let oauthID: string;
+        // const { id, displayName } = (req.session as any).passport.user;
+        // name = displayName;
+        // oauthID = id;
+
+        console.log((req.session as any).passport.user);
+        
+        return true;
+
+
+
+        // const username = "user-" + Date.now();
+        // const currentUser = true //await User.findOne({ oauthID: oauthID, type: type });
+        // if (currentUser) {
+        //     // const { accessToken, expirationDate } = createAccessToken(currentUser.id);
+
+        //     // return res.redirect(envConfigs("OAUTH_LOGIN_REDIRECT_URL")! + "?accessToken=" + encodeURIComponent(accessToken));
+        // } else {
+        //     const user = new User();
+
+        //     try {
+        //         // user.save();
+        //         const accessToken = Token.createToken(user);
+
+        //         return res.redirect(env("OAUTH_LOGIN_REDIRECT_URL")! + "?accessToken=" + encodeURIComponent(accessToken));
+        //     } catch (error) {
+        //         return res.redirect(env("OAUTH_LOGIN_REDIRECT_URL")! + "?error=" + encodeURIComponent("something went wrong"));
+        //     }
+        // }
     }
 
 }

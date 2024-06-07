@@ -3,8 +3,18 @@ import Image from "next/image";
 import { Label } from "@/lib/shadcn-ui/label";
 import { Input } from "@/lib/shadcn-ui/input";
 import { FcGoogle } from "react-icons/fc";
+import { useFormState } from "react-dom";
+import { CreateAccountAction } from "../services/actions";
 
 export default function SignupComponent() {
+  const [errorMessage, dispatch] = useFormState(CreateAccountAction, initialState)
+
+  const initialState = {
+    error:false,
+    formErrors: null,
+    message: "",
+    responseError: null
+  }
   return (
     <main className="bg-[#26313c] h-screen flex items-center justify-center p-10">
       <div className="grid box-animate w-full h-full grid-cols-1 bg-white md:grid-cols-2">
@@ -28,6 +38,7 @@ export default function SignupComponent() {
             <Label htmlFor="email">Name</Label>
             <Input
               className="mt-2 mb-4 bg-transparent rounded-full "
+              name="name"
               type="name"
               id="name"
               placeholder="Enter Name"
@@ -36,6 +47,7 @@ export default function SignupComponent() {
             <Label htmlFor="email">Email</Label>
             <Input
               className="mt-2 mb-4 bg-transparent rounded-full "
+              name="email"
               type="email"
               id="email"
               placeholder="Email"
@@ -44,6 +56,7 @@ export default function SignupComponent() {
             <Label htmlFor="email">Password</Label>
             <Input
               className="mt-2 mb-4 bg-transparent rounded-full "
+              name="password"
               type="password"
               id="password"
               placeholder="Password"

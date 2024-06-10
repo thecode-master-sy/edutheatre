@@ -1,7 +1,7 @@
-import { Button } from "@/lib/shadcn-ui/button";
+import { Button } from "@/lib/ui/button";
 import Image from "next/image";
-import { Label } from "@/lib/shadcn-ui/label";
-import { Input } from "@/lib/shadcn-ui/input";
+import { Label } from "@/lib/ui/label";
+import { Input } from "@/lib/ui/input";
 import { FcGoogle } from "react-icons/fc";
 
 export default function SignupComponent() {

@@ -1,3 +1,5 @@
+import { patterns } from "./utils";
+
 export type UserDetails = {
   email: FormDataEntryValue | null;
   password: FormDataEntryValue | null;
@@ -7,10 +9,13 @@ export interface NewUserDetails extends UserDetails {
   name: FormDataEntryValue | null;
 }
 
-export type FormErrors = {
-  email: string;
-  password: string;
-  name?: string;
+type PatternsKeys = keyof typeof patterns;
+
+export type FormState = {
+  error: boolean,
+  message: string;
+  errorType: PatternsKeys | "response" | null;
 }
+
 
 

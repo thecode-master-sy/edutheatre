@@ -15,7 +15,7 @@ const initialFormState: FormState = {
 	errorType: null,
 };
 
-export const SignUpForm = () => {
+export const LoginForm = () => {
 	const [state, formAction] = useFormState(
 		CreateAccountAction,
 		initialFormState
@@ -23,13 +23,6 @@ export const SignUpForm = () => {
 
 	return (
 		<Form action={formAction}>
-			<FormGroup>
-				<Label htmlFor="name">Name</Label>
-				<Input name="name" id="name" placeholder="Name" type="text" />
-				{state.errorType == "name" && (
-					<ErrorComponent>{state.message}</ErrorComponent>
-				)}
-			</FormGroup>
 			<FormGroup>
 				<Label htmlFor="email">Email</Label>
 				<Input

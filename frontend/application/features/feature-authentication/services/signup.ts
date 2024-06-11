@@ -40,6 +40,7 @@ export async function CreateNewUser(
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(newUserDetails),
+			
 		});
 
 		return await response.json();

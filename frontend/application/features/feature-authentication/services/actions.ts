@@ -2,14 +2,47 @@
 import { FormState } from "../types";
 import { patterns, setCookie, verify } from "../utils";
 import { CreateNewUser } from "./signup";
+import { LoginNewUser } from "./login";
 import { redirect } from "next/navigation";
 
+<<<<<<< HEAD
 export async function LoginAction() {
 	return {
 		error: false,
 		message: "this is the response with no errors",
+=======
+export async function Authenticate(
+	formState: FormState,
+	formData: FormData
+): Promise<FormState> {
+    //get user value
+	const email = (formData.get("email") as string) ?? "";
+	const password = (formData.get("password") as string) ?? "";
+
+    //make login request
+	
+	const UserDetails = {
+
+		email,
+		password,
+>>>>>>> 0b96ec81b5d05d9b1f407dbf84642b7440378d80
 	};
+	const response = await LoginNewUser(UserDetails);
+
+	if (response.error) {
+		return { ...response, errorType: "response" };
+	}
+	//set cookie if response was ok
+	if (response.data.token) {
+		setCookie("token", response.data.token);
+	}
+
+	//redirect after setting the cookie.
+	redirect("/tutors");
+
 }
+ 
+	
 
 export async function CreateAccountAction(
 	formState: FormState,

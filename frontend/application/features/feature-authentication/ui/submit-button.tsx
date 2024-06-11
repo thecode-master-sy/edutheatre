@@ -4,7 +4,7 @@ import { useFormStatus } from "react-dom";
 import { Mail } from "lucide-react";
 import { Loader2 } from "lucide-react";
 
-export const SignupButton = () => {
+export const SubmitButton = () => {
 	const { pending } = useFormStatus();
 
 	return (

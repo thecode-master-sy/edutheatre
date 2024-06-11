@@ -4,7 +4,7 @@ import { patterns, setCookie, verify } from "../utils";
 import { CreateNewUser } from "./signup";
 import { redirect } from "next/navigation";
 
-export async function Authenticate() {
+export async function LoginAction() {
 	return {
 		error: false,
 		message: "this is the response with no errors",
@@ -20,7 +20,7 @@ export async function CreateAccountAction(
 	const email = (formData.get("email") as string) ?? "";
 	const password = (formData.get("password") as string) ?? "";
 
-	//validate the inputs
+	//validate the inputs ->
 	if (!verify(name, patterns.name)) {
 		return {
 			error: true,

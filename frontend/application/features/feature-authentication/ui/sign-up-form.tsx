@@ -8,6 +8,8 @@ import { SubmitButton } from "./submit-button";
 import { useFormState } from "react-dom";
 import { FormState } from "../types";
 import { ErrorComponent } from "./error-component";
+import { useToast } from "@/lib/ui/use-toast";
+import { useEffect } from "react";
 
 const initialFormState: FormState = {
 	error: false,
@@ -20,6 +22,16 @@ export const SignUpForm = () => {
 		CreateAccountAction,
 		initialFormState
 	);
+	const { toast } = useToast();
+
+	useEffect(() => {
+		if (state.errorType == "response") {
+			toast({
+				variant: "destructive",
+				description: state.message,
+			});
+		}
+	}, [state]);
 
 	return (
 		<Form action={formAction}>

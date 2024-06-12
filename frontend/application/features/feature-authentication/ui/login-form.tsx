@@ -3,11 +3,13 @@
 import { Input } from "@/lib/ui/input";
 import { FormGroup, Form } from "@/lib/ui/form";
 import { Label } from "@/lib/ui/label";
-import { CreateAccountAction } from "../services/actions";
+import { LoginUserAction } from "../services/actions";
 import { SubmitButton } from "./submit-button";
 import { useFormState } from "react-dom";
 import { FormState } from "../types";
 import { ErrorComponent } from "./error-component";
+import { useToast } from "@/lib/ui/use-toast";
+import { useEffect } from "react";
 
 const initialFormState: FormState = {
 	error: false,
@@ -16,10 +18,18 @@ const initialFormState: FormState = {
 };
 
 export const LoginForm = () => {
-	const [state, formAction] = useFormState(
-		CreateAccountAction,
-		initialFormState
-	);
+	const [state, formAction] = useFormState(LoginUserAction, initialFormState);
+
+	const { toast } = useToast();
+
+	useEffect(() => {
+		if (state.errorType == "response") {
+			toast({
+				variant: "destructive",
+				description: state.message,
+			});
+		}
+	}, [state]);
 
 	return (
 		<Form action={formAction}>

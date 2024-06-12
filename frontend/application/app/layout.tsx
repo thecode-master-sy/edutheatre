@@ -2,6 +2,10 @@ import Footer from "@/features/footer";
 import Navbar from "@/features/Navbar";
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "@/lib/ui/toaster";
+import {Inter } from "next/font/google"
+
+const inter = Inter({subsets: ["latin"]})
 
 
 export const metadata: Metadata = {
@@ -16,13 +20,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
         <Navbar/>
         <main className="relative overflow-hidden">
         {children}
         </main>
+
         <Footer/>
+        <Toaster />
       </body>
     </html>
   );
-}
+
+};
+
+

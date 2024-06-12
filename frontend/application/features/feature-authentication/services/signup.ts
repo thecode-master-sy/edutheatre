@@ -1,36 +1,9 @@
-import { NewUserDetails } from "../types";
+import { AuthUserResponse, NewUserDetails } from "../types";
 import { BASE_URL } from "../utils";
-
-type UserResponse = {
-	id: number;
-	email: string;
-	role: string;
-	password: string;
-	created_at: string;
-	updated_at: string | null;
-};
-
-type DataResponse = {
-	user: UserResponse;
-	token: string;
-};
-
-type ErrorResponse = {
-	error: true;
-	message: string;
-};
-
-type SuccessResponse = {
-	error: false;
-	message: string;
-	data: DataResponse;
-};
-
-export type CreateUserResponse = ErrorResponse | SuccessResponse;
 
 export async function CreateNewUser(
 	newUserDetails: NewUserDetails
-): Promise<CreateUserResponse> {
+): Promise<AuthUserResponse> {
 	const URL = `${BASE_URL}/sign-up`;
 
 	try {
@@ -40,7 +13,6 @@ export async function CreateNewUser(
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(newUserDetails),
-			
 		});
 
 		return await response.json();

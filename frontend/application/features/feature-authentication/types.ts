@@ -18,4 +18,33 @@ export type FormState = {
 }
 
 
+type UserResponse = {
+	id: number;
+	email: string;
+	role: string;
+	password: string;
+	created_at: string;
+	updated_at: string | null;
+};
+
+type DataResponse = {
+	user: UserResponse;
+	token: string;
+};
+
+type ErrorResponse = {
+	error: true;
+	message: string;
+};
+
+type SuccessResponse = {
+	error: false;
+	message: string;
+	data: DataResponse;
+};
+
+export type AuthUserResponse = ErrorResponse | SuccessResponse;
+
+
+
 

@@ -1,8 +1,8 @@
 "use client";
-import { Button } from "@/lib/ui/button";
 import { useFormStatus } from "react-dom";
 import { Mail } from "lucide-react";
 import { Loader2 } from "lucide-react";
+import { Button } from "@/lib/ui/Button";
 
 export const SubmitButton = () => {
 	const { pending } = useFormStatus();

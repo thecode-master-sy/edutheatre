@@ -1,6 +1,6 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import morgan from "morgan";
-import { redisConfig, corsConfig, sessionConfig, env } from "./config";
+import {  corsConfig, env } from "./config";
 import Redis from 'ioredis';
 import { auth } from "./routes";
 import { OAuthUser, User } from "./models";
@@ -11,7 +11,7 @@ import { OAuth2Client } from "google-auth-library";
 
 function createApp() {
     const app: Application = express();
-    const redisEnv = redisConfig('dev');
+    // const redisEnv = redisConfig('dev'); 
     // const redisClient = new Redis(redisEnv!);
 
     app.use(express.urlencoded({ extended: true }));

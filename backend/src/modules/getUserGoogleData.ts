@@ -13,9 +13,14 @@ async function getUserGoogleData(access_token: any) {
         //     }
         // );
         const data = response.data;
+
+        // console.log(response);
+        console.log(data);
+        
+        
         return {
             error: false,
-            data: data
+            // data: data
         }
 
     } catch (err) {

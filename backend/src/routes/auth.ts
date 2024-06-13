@@ -16,42 +16,42 @@ auth.get("/google", Auth.oauthRedirect);
 //     return await Auth.oauthCallback(req,res);
 // });
 
-// auth.get("/google/callback", async (req, res) => {
-//     const code = req.query.code;
+auth.get("/google/callback", async (req, res) => {
+    const code = req.query.code;
 
-//     console.log(code);
-//     try {
-//         const redirectURL = "http://localhost:3000/api/auth/google/callback";
+    console.log(code);
+    try {
+        const redirectURL = "http://localhost:3000/api/auth/google/callback";
 
-//         const oAuth2Client = new OAuth2Client(
-//             process.env.CLIENT_ID,
-//             process.env.CLIENT_SECRET,
-//             redirectURL
-//         );
-//         const r = await oAuth2Client.getToken(code as string);
-//         // Make sure to set the credentials on the OAuth2 client.
-//         await oAuth2Client.setCredentials(r.tokens);
-//         console.info('Tokens acquired.');
-//         const user = oAuth2Client.credentials;
-//         console.log('credentials', user);
-//         const accessToken = user.access_token;
-//         // await getUserData(oAuth2Client.credentials.access_token);
-//         // console.log(user.access_token);
+        const oAuth2Client = new OAuth2Client(
+            process.env.CLIENT_ID,
+            process.env.CLIENT_SECRET,
+            redirectURL
+        );
+        const r = await oAuth2Client.getToken(code as string);
+        // Make sure to set the credentials on the OAuth2 client.
+        await oAuth2Client.setCredentials(r.tokens);
+        console.info('Tokens acquired.');
+        const user = oAuth2Client.credentials;
+        console.log('credentials', user);
+        const accessToken = user.access_token;
+        // await getUserData(oAuth2Client.credentials.access_token);
+        // console.log(user.access_token);
 
-//         await getUserGoogleData(accessToken);
-
-
+        await getUserGoogleData(accessToken);
 
 
-//         return res.json("Bingo")
-
-//     } catch (err) {
-//         console.log('Error logging in with OAuth2 user', err);
-//         return res.json("error")
-//     }
 
 
-// });
+        return res.json("Bingo")
+
+    } catch (err) {
+        console.log('Error logging in with OAuth2 user', err);
+        return res.json("error")
+    }
+
+
+});
 
 auth.get("/google/callback", async (req, res) => {
     const code = req.query.code;

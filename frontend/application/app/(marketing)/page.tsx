@@ -1,5 +1,3 @@
 export default function Page() {
-  return (
-  <div>this is the hompage</div>
-  )
+	return <div>this is the hompage</div>;
 }

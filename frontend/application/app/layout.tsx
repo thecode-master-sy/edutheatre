@@ -1,4 +1,4 @@
-import Navbar from "@/features/feature-marketing/ui/navbar";
+import Navbar from "@/lib/ui/navbar";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/lib/ui/toaster";

@@ -1,9 +1,12 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import morgan from "morgan";
-import { redisConfig, corsConfig, sessionConfig } from "./config";
+import { redisConfig, corsConfig, sessionConfig, env } from "./config";
 import Redis from 'ioredis';
 import { auth } from "./routes";
-import { User } from "./models";
+import { OAuthUser, User } from "./models";
+import session from "express-session";
+// import { googlePassport } from "./strategies/google";
+import { OAuth2Client } from "google-auth-library";
 
 
 function createApp() {
@@ -13,7 +16,23 @@ function createApp() {
 
     app.use(express.urlencoded({ extended: true }));
     app.use(corsConfig);
-    app.use(sessionConfig);
+
+    app.use(
+        session({
+            secret: env("secretKey")!, // session secret
+            resave: false,
+            saveUninitialized: false,
+        })
+    );
+
+    // app.use(googlePassport.initialize());
+    // app.use(googlePassport.session());
+
+
+    // app.use(sessionConfig);
+    // app.use(googlePassport.initialize());
+    // app.use(googlePassport.session());
+
 
     app.use(express.json());
     app.use(morgan("combined"));
@@ -26,7 +45,7 @@ function createApp() {
             // await redisClient.set("user", "wonder");
             return res.status(200).json({
                 'error': false,
-                'message': await (new User()).create()
+                // 'message': await (new User()).create()
             });
         } catch (err) {
             console.error('Error creating item:', err);
@@ -34,17 +53,26 @@ function createApp() {
 
     });
 
-    // app.get("/test1", async (req: Request, res: Response) => {
-    //     try {
-    //         const value = await redisClient.get("user");
-    //         return res.status(200).json({
-    //             'error': false,
-    //             'message': value
-    //         });
-    //     } catch (err) {
-    //         console.error('Error creating item:', err);
-    //     }
-    // });
+    app.get("/admin/migrate", async (req: Request, res: Response) => {
+        try {
+            const created: boolean[] = [
+                await (new User()).create(),
+                await (new OAuthUser()).create()
+            ];
+
+            return res.status(400).json({
+                error: true,
+                message: "work on this route",
+                data: created
+            });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({
+                error: true,
+                message: "something went wrong"
+            });
+        }
+    });
 
     app.get("/", (req: Request, res: Response) => {
         res.status(200).json({
@@ -52,6 +80,8 @@ function createApp() {
             'message': process.pid
         });
     });
+
+    // app.post("/")
 
     return app;
 }

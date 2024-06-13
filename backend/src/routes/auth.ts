@@ -40,6 +40,8 @@ auth.get("/google/callback", async (req, res) => {
 
         await getUserGoogleData(accessToken);
         console.log("logging");
+        console.log("more logging");
+        
         
 
 

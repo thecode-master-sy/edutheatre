@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
-import { User, Token } from "./../services";
+import { User as Authentication, Token } from "./../services";
 import { emailValidator } from "../modules";
 import { UserRepo } from "../repos";
 import bcrypt from "bcrypt";
+import { OAuth2Client } from "google-auth-library";
 import { env } from "../config";
-
+import { getUserGoogleData } from "./../modules";
 
 class Auth {
 
@@ -27,7 +28,7 @@ class Auth {
         const emailExists = await UserRepo.getUserWithEmail(email);
 
         if (!emailExists) {
-            const serviceResult = await User.signUp([name, email, password]);
+            const serviceResult = await Authentication.signUp([name, email, password]);
             return res.status(serviceResult.statusCode).json(serviceResult.json);
         }
 
@@ -48,7 +49,7 @@ class Auth {
                 return res.status(200).json({
                     error: false,
                     message: "login was successful",
-                    data:{
+                    data: {
                         user: user,
                         token: accessToken
                     }
@@ -66,37 +67,57 @@ class Auth {
         });
     }
 
-    public static async oauthLogin(req: Request, res: Response){
-        let name: string;
-        let oauthID: string;
-        // const { id, displayName } = (req.session as any).passport.user;
-        // name = displayName;
-        // oauthID = id;
+    public static async oauthRedirect(req: Request, res: Response) {
+        res.header("Access-Control-Allow-Origin", 'http://localhost:5173');//TODO: use a loop here
+        res.header("Access-Control-Allow-Credentials", 'true');
+        res.header("Referrer-Policy", "no-referrer-when-downgrade");
 
-        console.log((req.session as any).passport.user);
-        
-        return true;
+        const serviceResult = Authentication.oauthRedirect();
+        return res.status(200).json({
+            'error': false,
+            'data': serviceResult
+        });
+    }
+
+    // public static async oauthCallback(req: Request, res: Response){
+    //     const code = req.query.code as string;
+    //     const serviceResult = await Authentication.oauthCallback(code);
+    //     // return res.status(301).json("hello");
+    //     return await getUserGoogleData(serviceResult);
+    // }
+
+    public static async oauthCallback(req: Request, res: Response) {
+        const code = req.query.code;
+
+        console.log(code);
+        try {
+            const redirectURL = "http://localhost:3000/api/auth/google/callback";
+
+            const oAuth2Client = new OAuth2Client(
+                process.env.CLIENT_ID,
+                process.env.CLIENT_SECRET,
+                redirectURL
+            );
+            const r = await oAuth2Client.getToken(code as string);
+            // Make sure to set the credentials on the OAuth2 client.
+            await oAuth2Client.setCredentials(r.tokens);
+            console.info('Tokens acquired.');
+            const user = oAuth2Client.credentials;
+            console.log('credentials', user);
+            const accessToken = user.access_token;
+            // await getUserData(oAuth2Client.credentials.access_token);
+            // console.log(user.access_token);
+            await getUserGoogleData(accessToken);
+            console.log("BINGO");
+            
 
 
+            return res.json("Bingo")
 
-        // const username = "user-" + Date.now();
-        // const currentUser = true //await User.findOne({ oauthID: oauthID, type: type });
-        // if (currentUser) {
-        //     // const { accessToken, expirationDate } = createAccessToken(currentUser.id);
-
-        //     // return res.redirect(envConfigs("OAUTH_LOGIN_REDIRECT_URL")! + "?accessToken=" + encodeURIComponent(accessToken));
-        // } else {
-        //     const user = new User();
-
-        //     try {
-        //         // user.save();
-        //         const accessToken = Token.createToken(user);
-
-        //         return res.redirect(env("OAUTH_LOGIN_REDIRECT_URL")! + "?accessToken=" + encodeURIComponent(accessToken));
-        //     } catch (error) {
-        //         return res.redirect(env("OAUTH_LOGIN_REDIRECT_URL")! + "?error=" + encodeURIComponent("something went wrong"));
-        //     }
-        // }
+        } catch (err) {
+            console.log('Error logging in with OAuth2 user', err);
+            return res.json("error")
+        }
     }
 
 }

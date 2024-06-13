@@ -1,5 +1,11 @@
-export default function Page() {
+
+import Hero from "@/features/feature-marketing/ui/Hero";
+
+export default function Home() {
   return (
-  <div>this is the hompage</div>
+    <>
+     <Hero/>
+
+    </>
   )
 }

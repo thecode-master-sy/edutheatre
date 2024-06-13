@@ -1,4 +1,4 @@
-import User from "./User";
+import Authentication from "./Authentication";
 import Token from "./Token";
 
-export { User, Token };
+export { Authentication as User, Token };

@@ -16,7 +16,17 @@ const Guide = () => {
         </div>
       </div>
 
+      <div className="flexCenter max-container relative w-full">
+        <Image 
+          src="/boy.png"
+          alt="boat"
+          width={1440}
+          height={580}
+          className="w-full object-cover object-center 2xl:rounded-5xl"
+        />
 
+
+      </div>
     </section>
   )
 }

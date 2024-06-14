@@ -1,16 +1,15 @@
-import Text from "@/features/feature-marketing/ui/Text"
-import Hero from "@/features/feature-marketing/ui/Hero";
-import Layout from "@/features/feature-marketing/ui/Layout"
-import Guide from "@/features/feature-marketing/ui/Guide"
+import Hero from "@/features/feature-marketing/ui/hero";
+import Text from "@/features/feature-marketing/ui/text";
+import Layout from "@/features/feature-marketing/ui/layout";
+import Guide from "@/features/feature-marketing/ui/guide";
 
 export default function Home() {
-  return (
-    <>
-     <Hero/>
-     <Text/>
-     <Layout/>
-     <Guide/>
-
-    </>
-  )
+	return (
+		<>
+			<Hero />
+			<Text />
+			<Layout />
+			<Guide />
+		</>
+	);
 }

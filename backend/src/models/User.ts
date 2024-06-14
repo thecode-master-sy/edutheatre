@@ -24,6 +24,10 @@ class User extends Model {
         return await this.queryWithParams(`SELECT * FROM ${this.tblName} WHERE email = $1`,[email]);
     }
 
+    // public async getUserWithID(id: string) {
+    //     return await this.queryWithParams(`SELECT * FROM ${this.tblName} WHERE id = $1`, [email]);
+    // }
+
 
 }
 

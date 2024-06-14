@@ -33,7 +33,7 @@ export default class Token {
 
     public static createToken(data: any) {
         return jsonwebtoken.sign(
-            { id: data, type: "access" },
+            { data: data, type: "access" },
             env("accessTokenSecret") as string,
             { expiresIn: "30d" }
         );

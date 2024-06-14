@@ -12,7 +12,8 @@ export default function env(key: string) {
         'redisURL': process.env.REDIS_URL!,
         'clientID': process.env.CLIENT_ID!,
         'clientSecret': process.env.CLIENT_SECRET!,
-        'callbackUrl': process.env.CALLBACK_URL
+        'callbackUrl': process.env.CALLBACK_URL!,
+        'frontendRedirect': process.env.FRONTEND_REDIRECT!
     }[key];
 }
 

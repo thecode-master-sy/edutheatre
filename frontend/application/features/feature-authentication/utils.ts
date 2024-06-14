@@ -43,3 +43,8 @@ export function setCookie(name: string, value: string) {
 		maxAge: 24 * 60 * 60 * 30,
 	});
 }
+
+
+export function getCookie(name: string) {
+	return cookies().get(name)
+}

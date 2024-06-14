@@ -11,6 +11,15 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			fontFamily: {
+				'dm-sans': ['DM Sans', 'sans-serif'],
+			  },
+			  fontSize: {
+				'64px': '64px',
+			  },
+			  lineHeight: {
+				'83.33': '83.33px',
+			  },
 			colors: {
 				background: "var(--background)",
 				primary: "var(--primary)",

@@ -9,7 +9,10 @@ const Hero = () => {
         <h1 className="text-4xl font-bold leading-tight text-gray-900 mb-6">
           Find the perfect tutor for your learning needs
         </h1>
-		<p className="mx-auto">Empowering students to take control of their education with our online tutoring platform. Connect with experienced tutors</p>
+		<p className="mx-auto">
+			Empowering students to take control of
+		<br/> their education with our online tutoring platform.
+		<br/> Connect with experienced tutors</p>
         
           <a className="inline-block px-8 py-3 text-base font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700">
             Connect to tutor

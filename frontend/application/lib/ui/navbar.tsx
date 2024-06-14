@@ -7,15 +7,7 @@ const Navbar = () => {
 	return (
 		<nav className=" flexBetween max-container padding-container relative z-30 py-5">
 			<Link href="/">
-				<h1 className="
-				font-family: Noto Sans JP;
-				font-size: 18px;
-                font-weight: 700;
-                line-height: 24px;
-                text-align: center;
-				background: #000000;
-
-                ">
+				<h1 className="text-xl font-bold text-gray-900 mb-4">
 					Edutheatre
 				</h1>
 			</Link>
@@ -33,7 +25,7 @@ const Navbar = () => {
 			</ul>
 
 			<div className="lg:flexCenter hidden">
-				<Button>Login</Button>
+				<Button className="inline-block px-6 py-2 text-base font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700">Login</Button>
 			</div>
 
 			<Image

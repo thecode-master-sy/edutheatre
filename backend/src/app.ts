@@ -1,7 +1,7 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import {  corsConfig, env, redisConfig } from "./config";
-import { auth, user } from "./routes";
+import { auth, user, db } from "./routes";
 import { OAuthUser, User } from "./models";
 import { validateJWT, validateUser,handleErrors } from "./middlewares";
 
@@ -17,6 +17,7 @@ function createApp() {
 
     app.use("/api/auth", auth);
     app.use("/api/users", [validateJWT(["access", env("accessTokenSecret")!]), validateUser,user]);
+    app.use("/api/admin/db",[db]);
 
     app.get("/test", async (req: Request, res: Response) => {
         try {

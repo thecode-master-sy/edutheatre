@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { User as Authentication, Token } from "./../services";
+import { Authentication, Token } from "./../services";
 import { emailValidator } from "../modules";
 import { UserRepo } from "../repos";
 import bcrypt from "bcrypt";

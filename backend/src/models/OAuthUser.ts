@@ -9,13 +9,15 @@ class OAuthUser extends Model {
             id SERIAL PRIMARY KEY,
             oauth_id TEXT NOT NULL UNIQUE,
             email TEXT UNIQUE NOT NULL,
+            user_id INTEGER,
+            CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP
         )`;
     }
 
     public async insert(values: any[]) {
-        return await this.queryWithParams(`INSERT INTO ${this.tblName} (oauth_id, email) VALUES ($1, $2) RETURNING *`, values);
+        return await this.queryWithParams(`INSERT INTO ${this.tblName} (oauth_id, email,user_id) VALUES ($1, $2, $3) RETURNING *`, values);
     }
 
     public async getUserWithEmail(email: string) {

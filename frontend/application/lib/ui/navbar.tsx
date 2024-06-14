@@ -7,7 +7,17 @@ const Navbar = () => {
 	return (
 		<nav className=" flexBetween max-container padding-container relative z-30 py-5">
 			<Link href="/">
-				<Image src="/" alt="logo" width={74} height={29} />
+				<h1 className="
+				font-family: Noto Sans JP;
+				font-size: 18px;
+                font-weight: 700;
+                line-height: 24px;
+                text-align: center;
+				background: #000000;
+
+                ">
+					Edutheatre
+				</h1>
 			</Link>
 
 			<ul className="hidden h-full gap-12 lg:flex">
